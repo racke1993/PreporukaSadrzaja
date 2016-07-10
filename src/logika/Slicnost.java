@@ -11,6 +11,10 @@ public class Slicnost {
 	public Slicnost() {
 		// TODO Auto-generated constructor stub
 	}
+	public Slicnost(String prviText, String drugiText){
+		this.prviText = prviText;
+		this.drugiText = drugiText;
+	}
 	public Slicnost(String prviText, String drugiText, double slicnost,String valuePrvog,String valueDrugog){
 		this.prviText = prviText;
 		this.drugiText = drugiText;

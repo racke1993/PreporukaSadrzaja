@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import logika.Kontroler;
+import logika.Kontroler2;
 import logika.Metode;
 
 
@@ -17,6 +18,9 @@ public class CosineSimilarity {
 		
 		HashMap<String,Double> najslicniji = new HashMap<>();//putanja, slicnost?
 		HashMap tekstovi = Kontroler.getInstanca().getTekstovi();
+		
+		///KLJUCNO KOJI SE TEKSTOVI UZIMAJU
+		
 		
 		double slicnost;
 			Iterator iterator = tekstovi.keySet().iterator();//key - putanja, string - sadrzaj
@@ -30,7 +34,7 @@ public class CosineSimilarity {
 			   nizDokumenata[1] = text.toLowerCase().trim();
 			   slicnost = tfPojasnjenje.izvrsiZaPoredjenje(nizDokumenata);
 			   
-			   System.out.println(value + " VS " + text + " = "+slicnost);
+			   //System.out.println(value + " VS " + text + " = "+slicnost);
 //			   
 			   if(slicnost==1) continue;
 			   najslicniji.put(key, slicnost);
@@ -43,9 +47,9 @@ public class CosineSimilarity {
 			
 			
 			//dole zakomentarisana metoda mora se realizovati!
-			System.out.println("\nNaslicniji su:");
-			Metode.printHashMap(najslicniji);
-			System.out.println("*********************************");
+//			System.out.println("\nNaslicniji su:");
+//			Metode.printHashMap(najslicniji);
+//			System.out.println("*********************************");
 			return najslicniji;
 		
 	}

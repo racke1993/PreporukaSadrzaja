@@ -59,8 +59,10 @@ public class JSoup {
 			for(String adresa : RSSReader.readRSS("https://www.theguardian.com/uk/rss")){
 				System.out.println("Nova iteracija: "+brojac++);
 				
-				if(brojac == 0 || brojac == 1 || brojac ==2) continue;
-				if(brojac==12) break;
+				if(brojac == 0 || brojac == 1 || brojac ==2 || brojac == 69
+						 || brojac == 70  || brojac == 71  || brojac == 68  || brojac == 67) continue;
+				//za ove brojeve se ne dobijaju validni dokumenti
+				if(brojac==120) break;
 				//System.out.println(adresa);
 				//System.out.println("ble?");
 				String rez = metoda(adresa);
@@ -76,7 +78,7 @@ public class JSoup {
 			}
 			
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

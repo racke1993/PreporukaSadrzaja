@@ -110,7 +110,7 @@ public class Metode {
 	}
 	public static String izvuciNazivIzPutanje(String putanja){
 		String nazivFajla = putanja.substring(putanja.lastIndexOf("/")+1);
-		nazivFajla = nazivFajla.substring(0, nazivFajla.length() - 5);
+		nazivFajla = nazivFajla.substring(0, nazivFajla.length() - 4);
 		return nazivFajla;
 	}
 

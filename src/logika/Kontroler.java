@@ -21,16 +21,17 @@ public class Kontroler {
 
 	private static Kontroler instanca;
 	private static HashMap<String, String> tekstovi; //mapa key-value : putanja-tekst
-	private static HashMap<String, Integer> recnikProba;
-	File[] files;
+	private static HashMap<String, String> upiti;
+	File[] files,files2;
 	
 	public Kontroler(){
 		
-		files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviText/").listFiles();
-		//files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/konacniFajlovi/").listFiles();
+		//files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviProba/").listFiles();
+		files2 = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/upiti/").listFiles();
+		files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/konacniFajlovi/").listFiles();
 		tekstovi = Metode.vratiFajlove(files);
+		upiti = Metode.vratiFajlove(files2);
 		
-		recnikProba = new HashMap<String,Integer>();
 		Metode.vratiFajlove(files);
 	}
 	public static Kontroler getInstanca(){
@@ -40,9 +41,6 @@ public class Kontroler {
 	
 	public HashMap<String, String> getTekstovi() {
 		return this.tekstovi;
-	}
-	public HashMap<String, Integer> getRecnik() {
-		return this.recnikProba;
 	}
 	
 	public File[] getFiles() {
@@ -55,6 +53,7 @@ public class Kontroler {
 		this.tekstovi = tekstovi;
 	}
 	
+	
 //	public void formirajRecnik(){
 //		File[] files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviText/").listFiles();
 //		
@@ -65,6 +64,12 @@ public class Kontroler {
 //	}
 
 	
+	public static HashMap<String, String> getUpiti() {
+		return upiti;
+	}
+	public static void setUpiti(HashMap<String, String> upiti) {
+		Kontroler.upiti = upiti;
+	}
 	public static void main(String[] args) throws IOException{
 		Metode.napuniRecnik();
 		//Kontroler.getInstanca().printHashMap(Kontroler.getInstanca().getTekstovi());

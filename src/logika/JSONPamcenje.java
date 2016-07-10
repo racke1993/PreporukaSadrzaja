@@ -82,17 +82,18 @@ public class JSONPamcenje {
     	
     }
     
-    public static double vratiInstancuSlicnostiIzJSONa(Slicnost s){
+    public static double vratiInstancuSlicnostiIzJSONa(Slicnost s,String jsonFajl){
     	
     	String nazivPrvog = s.getPrviText();
     	String nazivDrugog = s.getDrugiText();
     	
-    	double slicnost = 0;
+    	
+    	double slicnost = -71;
 		String vrednostPrvog = null;
 		String vrednostDrugog = null;
     	
     	try{
-    				FileReader reader = new FileReader("Slicnost.json");
+    				FileReader reader = new FileReader(jsonFajl);
 
     				JSONParser jsonParser = new JSONParser();
     				JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
@@ -101,18 +102,26 @@ public class JSONPamcenje {
 
     				// take each value from the json array separately
     				while (i.hasNext()) {
+    					boolean nasao = false;
     					JSONObject innerObj = (JSONObject) i.next();
+    					
     					//System.out.println(innerObj.get("rho"));
     					//if((double)innerObj.get("rho")>0.1)
+    					
+    					
+    					//System.out.println(((String)innerObj.get("keyPrvog")+" vs "+ nazivPrvog));
     					if(((String)innerObj.get("keyPrvog")).equals(nazivPrvog) && 
     					((String)innerObj.get("keyDrugog")).equals(nazivDrugog)
 						){
+    						nasao = true;
+    						System.out.println("Nasao slicnost");
     						slicnost = (double) innerObj.get("slicnost");
+    						
     						//vrednostPrvog = ((String) innerObj.get("vrednostPrvog"));
     						//vrednostDrugog = ((String) innerObj.get("vrednostDrugog"));
     					}
-    					return slicnost;
     				}
+    				
 
     			} catch (FileNotFoundException ex) {
     				ex.printStackTrace();
@@ -123,7 +132,8 @@ public class JSONPamcenje {
     			} catch (NullPointerException ex) {
     				ex.printStackTrace();
     			}
-		return -99;
+    	if(slicnost!=-71) return slicnost;
+    	else return -99;
     }
     
     
@@ -131,16 +141,15 @@ public class JSONPamcenje {
     	//String reci =
     			//vratiStringReciIzJsona("fajloviJSON/Trump comments 'clearly' racist, says Gary Johnson amid antisemitism furor | US news | The Guardian.json");
     			
-    			File[] files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviJSON/").listFiles();
     			
     			
     			//NAJBITNIJA METODA
-    			//generisiFajlove(files);
-    			Slicnost s = new Slicnost();
-    			s.setPrviText("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviText/osmi.txt");
-    			s.setDrugiText("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviText/prvi.txt");
+    			//File[] files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviJSON/").listFiles();
+				//generisiFajlove(files);
     			
-    			System.out.println(vratiInstancuSlicnostiIzJSONa(s));
+    			Slicnost proba = new Slicnost("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviProba/treci.txt",
+    					"/Users/Radomir/Documents/workspace/SeleniumProjekat/probniUpiti/petiUpit.txt");
+    			System.out.println(vratiInstancuSlicnostiIzJSONa(proba,"slicnostProba.json"));
     			
     			
     	//String reci2 = vratiStringReciIzJsona("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviJSON/david-cameron-concessions-syrian-child-refugees.json");

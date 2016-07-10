@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import logika.Slicnost;
 import logika.Kontroler;
+import logika.Kontroler2;
 import logika.Metode;
 
 public class tfPojasnjenje {
@@ -246,20 +247,24 @@ public class tfPojasnjenje {
 		String prviText="";
 		String drugiText="";
 		
-		HashMap<String,String> nazivISadrzaj = (HashMap<String, String>) Kontroler.getInstanca().getTekstovi();
+		HashMap<String,String> tekstovi = (HashMap<String, String>) Kontroler.getInstanca().getTekstovi();
+		HashMap<String,String> upiti = (HashMap<String, String>) Kontroler.getInstanca().getUpiti();
+		
+
 		List<Slicnost> nizSlicnosti = new ArrayList<>();
 		
 		
-		Iterator it1 = nazivISadrzaj.keySet().iterator();
+		Iterator it1 = tekstovi.keySet().iterator();
 		  
 		int brojacNeki = 0;
 		while (it1.hasNext()) {
 			System.out.println(brojacNeki++);
 			
 		   String keyPrvog = it1.next().toString();
-		   String valuePrvog = nazivISadrzaj.get(keyPrvog).toString();
+		   String valuePrvog = tekstovi.get(keyPrvog).toString();
 		  
-		   Iterator it2 = nazivISadrzaj.keySet().iterator();
+		   
+		   Iterator it2 = upiti.keySet().iterator();
 		   
 		   
 		   int brojac = 0;
@@ -267,7 +272,7 @@ public class tfPojasnjenje {
 			   if(brojac==0){brojac++;continue;}
 			   
 			   String keyDrugog = it2.next().toString();
-			   String valueDrugog = nazivISadrzaj.get(keyDrugog).toString();
+			   String valueDrugog = upiti.get(keyDrugog).toString();
 			   
 			   
 			   
@@ -277,7 +282,6 @@ public class tfPojasnjenje {
 				double sl = tfPojasnjenje.izvrsiZaPoredjenje(nizZaPoredjenje);
 			   
 				if(sl!=1.0){
-					//System.out.println("Izmedju prvog: "+valuePrvog+" i drugog "+valueDrugog+" slicnost iznosi: "+sl);
 					
 					Slicnost instanca = new Slicnost();
 					instanca.setSlicnost(sl);
@@ -297,15 +301,77 @@ public class tfPojasnjenje {
 		return nizSlicnosti;
 		
     }
-    
-    
-    public static void vratiSlicnosti(){
+//    public static List<Slicnost> generisiSlicnostiIzmedjuTekstova(){
+////    	
+////    	PrintWriter writer = new PrintWriter("slicnosti.txt", "UTF-8");
+////		writer.println(sadrzaj);
+////		writer.close();
+////		System.out.println("Fajl sacuvan");
+//		
+//		
+//		double slicnost = -99;
+//		String prviText="";
+//		String drugiText="";
+//		
+//		HashMap<String,String> tekstovi = (HashMap<String, String>) Kontroler.getInstanca().getTekstovi();
+//		
+//		List<Slicnost> nizSlicnosti = new ArrayList<>();
+//		
+//		
+//		Iterator it1 = tekstovi.keySet().iterator();
+//		  
+//		int brojacNeki = 0;
+//		while (it1.hasNext()) {
+//			System.out.println(brojacNeki++);
+//			
+//		   String keyPrvog = it1.next().toString();
+//		   String valuePrvog = tekstovi.get(keyPrvog).toString();
+//		  System.out.println(keyPrvog+" "+valuePrvog);
+//		   Iterator it2 = tekstovi.keySet().iterator();
+//		   
+//		   
+//		   int brojac = 0;
+//		   while (it2.hasNext()){
+//			   if(brojac==0){brojac++;continue;}
+//			   
+//			   String keyDrugog = it2.next().toString();
+//			   String valueDrugog = tekstovi.get(keyDrugog).toString();
+//			   
+//			   
+//			   
+//				String[] nizZaPoredjenje = new String[2];
+//				nizZaPoredjenje[0]=valuePrvog;
+//				nizZaPoredjenje[1]=valueDrugog;
+//				double sl = tfPojasnjenje.izvrsiZaPoredjenje(nizZaPoredjenje);
+//			   
+//				if(sl!=1.0){
+//					//System.out.println("Izmedju prvog: "+valuePrvog+" i drugog "+valueDrugog+" slicnost iznosi: "+sl);
+//					
+//					Slicnost instanca = new Slicnost();
+//					instanca.setSlicnost(sl);
+//					instanca.setPrviText(keyPrvog);
+//					instanca.setDrugiText(keyDrugog);
+//					instanca.setValuePrvog(valuePrvog);
+//					instanca.setValueDrugog(valueDrugog);
+//					
+//					nizSlicnosti.add(instanca);
+//					
+//				}
+//		   }
+//		   System.out.println("");
+//		   //System.out.println(key + " " + value);
+//		}
+//		System.out.println("GOTOVO\n\n\n\n\n\n");
+//		return nizSlicnosti;
+//		
+//    }
+//    
+    public static void vratiSlicnosti(String nazivFajla){
     	
     	List<Slicnost> lista = tfPojasnjenje.generisiSlicnosti();
-    	
     	PrintWriter writer1;
 		try {
-			writer1 = new PrintWriter("Slicnost.json", "UTF-8");
+			writer1 = new PrintWriter(nazivFajla, "UTF-8");
 		
     	
     	writer1.write("{\n\t\"instance\":[\n\t");
@@ -356,29 +422,12 @@ public class tfPojasnjenje {
     
     public static void main(String[] args) {
 
-    	
-    	String[] dokumenti = new String[9];
-    	
-    	dokumenti[0] = Metode.vratiStringFajla("fajloviText/prvi.txt");
-    	dokumenti[1] = Metode.vratiStringFajla("fajloviText/drugi.txt");
-    	dokumenti[2] = Metode.vratiStringFajla("fajloviText/treci.txt");
-    	dokumenti[3] = Metode.vratiStringFajla("fajloviText/cetvrti.txt");
-    	dokumenti[4] = Metode.vratiStringFajla("fajloviText/peti.txt");
-    	dokumenti[5] = Metode.vratiStringFajla("fajloviText/sesti.txt");
-    	dokumenti[6] = Metode.vratiStringFajla("fajloviText/sedmi.txt");
-    	dokumenti[7] = Metode.vratiStringFajla("fajloviText/osmi.txt");
-    	
-    	String query = "I am not a vegan";
+
     	//1.tip
     	//izvrsiSve(query,dokumenti);
     	
-    	vratiSlicnosti();
-    	
-    	//2.tip
-//    	String[] noviNiz = {"Ja sam ja".toLowerCase(),"Ti sam ja ti".toLowerCase()};
-//    	System.out.println("text: "+dokumenti[0]);
-//    	System.out.println("text: "+dokumenti[1]);
-//    	System.out.println(izvrsiZaPoredjenje(noviNiz));
+    	//vratiSlicnosti("slicnostProba.json");
+    	vratiSlicnosti("slicnost.json");
     	
     	
     	
