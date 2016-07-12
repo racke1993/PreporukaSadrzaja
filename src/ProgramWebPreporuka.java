@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logika.Metode;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -48,8 +51,15 @@ public class ProgramWebPreporuka extends JFrame {
 		JButton button = new JButton("Pokreni upit");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String rezultat = Algoritmi.metoda(textField.getText().trim());
+				String unos = ("/upiti/").concat(textField.getText().trim());
+				if(!Metode.postoji(unos)){
+					textField_1.setText("probajte opet sa postojecim fajlovima");
+				}
+				else
+				{
+				String rezultat = Algoritmi.vratiMinHillClimbing("upiti/"+(textField.getText().trim()));
 				textField_1.setText(rezultat);
+				}
 			}
 		});
 		button.setBounds(263, 132, 117, 29);

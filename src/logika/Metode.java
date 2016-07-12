@@ -25,51 +25,15 @@ public class Metode {
 		HashMap<String,String> tekstovi = new HashMap<>();
 	    for (File file : files) {
 	        if(!file.getPath().contains(".DS_Store")){
-	        	//System.out.println(file.getPath());
 	        	tekstovi.put((String)file.getPath(), vratiStringFajla((String)file.getPath()));
-	        	//System.out.println((String)file.getPath()+vratiStringFajla((String)file.getPath()));
 	        	}
 	    }
+	    //printHashMap(tekstovi);
 	    System.out.println("Fajlovi vraceni!");
 	    return tekstovi;
 	    //printHashMap(keyValue);
 	}
-	public static String vratiStringFajla(String putanja){
-		String text = " ";
-		// This will reference one line at a time
-        String line = null;
-       
-        try {
-            // FileReader reads text files in the default encoding.
-            FileReader fileReader = 
-                new FileReader(putanja);
-
-            // Always wrap FileReader in BufferedReader.
-            BufferedReader bufferedReader = 
-                new BufferedReader(fileReader);
-
-            while((line = bufferedReader.readLine()) != null) {
-            	text += line;
-            }   
-
-            // Always close files.
-            bufferedReader.close();         
-        }
-        catch(FileNotFoundException ex) {
-            System.out.println(
-                "Unable to open file '" + 
-                		putanja + "'");                
-        }
-        catch(IOException ex) {
-            System.out.println(
-                "Error reading file '" 
-                + putanja + "'");                  
-            // Or we could just do this: 
-            // ex.printStackTrace();
-        }
-        return text.trim().toLowerCase();
-        
-	}
+	
 	
 	public static String vratiRandom(HashMap<String,String> map){
 		//Metode.printHashMap(map);
@@ -180,25 +144,6 @@ public class Metode {
 		
 	}
 //	
-//	public static void napuniRecnikPravi(){
-//		File[] files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviText/").listFiles();
-//		String zaRecnik = "";
-//		PrintWriter writer1 = null;
-//		try{
-//	    for (File file : files) {
-//	        if(!file.getPath().contains(".DS_Store")){
-//	        	zaRecnik+=vratiStringFajlaBezPonavljanja(file.getPath());
-//	        }
-//	    }
-//	    writer1 = new PrintWriter("RecnikProbaNeka.txt", "UTF-8");
-//		
-//		writer1.write(zaRecnik);
-//		}
-//		catch(Exception e){System.out.println("Greska: "+e.getMessage());}
-//		writer1.close();
-//		System.out.println("Recnik uspesno napunjen!");
-//	}
-//	
 	public static String normalizacija(String text){
 		return text.replaceAll("[^A-Za-z0-9\\s]", "").toLowerCase();
 	}
@@ -290,6 +235,101 @@ public class Metode {
 		writer.println(sadrzaj);
 		writer.close();
 		System.out.println("Fajl sacuvan");
+	}	
+	public static String vratiStringFajla(String putanja){
+		
+//		System.out.println("vrati string fajla");
+//		
+//		String filePath = new File("").getAbsolutePath().concat(putanja);
+//		System.out.println("PATH::::"+filePath);
+		
+		String text = " ";
+		// This will reference one line at a time
+        String line = null;
+       
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader = 
+                new FileReader(putanja);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = 
+                new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+            	text += line;
+            }   
+
+            // Always close files.
+            bufferedReader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                		putanja + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + putanja + "'");                  
+            // Or we could just do this: 
+            // ex.printStackTrace();
+        }
+        return text.trim().toLowerCase();
+        
 	}
-	
+	public static String vratiStringFajlaRelative(String putanja){
+		
+		System.out.println("vrati string fajla");
+		
+		String filePath = new File("").getAbsolutePath().concat("/"+putanja);
+		System.out.println("Putanja:"+filePath);
+		
+		String text = " ";
+		// This will reference one line at a time
+        String line = null;
+       
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader = 
+                new FileReader(filePath);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = 
+                new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+            	text += line;
+            }   
+
+            // Always close files.
+            bufferedReader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                		filePath + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + putanja + "'");                  
+            // Or we could just do this: 
+            // ex.printStackTrace();
+        }
+        return text.trim().toLowerCase();
+        
+	}
+	public static boolean postoji(String putanja){
+		File f = new File(new File("").getAbsolutePath().concat("/"+putanja));
+		if(f.exists() && !f.isDirectory()) { 
+		   return true;
+		}
+		return false;
+	}
+	public static void main(String[] args) {
+		System.out.println(vratiStringFajlaRelative("/probniUpiti/treciUpit.txt"));
+		System.out.println(postoji("/probniUpiti/treciUpit.txt"));
+	//	/Users/Radomir/Documents/workspace/SeleniumProjekat/probniUpiti/treciUpit.txt
+	}
 }

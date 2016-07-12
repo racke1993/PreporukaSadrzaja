@@ -235,7 +235,7 @@ public class tfPojasnjenje {
     	
     }
     
-    public static List<Slicnost> generisiSlicnosti(){
+    public static List<Slicnost> generisiSlicnosti(String nazivKontrolera){
 //    	
 //    	PrintWriter writer = new PrintWriter("slicnosti.txt", "UTF-8");
 //		writer.println(sadrzaj);
@@ -246,9 +246,16 @@ public class tfPojasnjenje {
 		double slicnost = -99;
 		String prviText="";
 		String drugiText="";
+		HashMap<String,String> tekstovi = null,upiti=null;
+		if(nazivKontrolera.equals("Kontroler")){
+			tekstovi = (HashMap<String, String>) Kontroler.getInstanca().getTekstovi();
+			upiti = (HashMap<String, String>) Kontroler.getInstanca().getUpiti();
+		}
 		
-		HashMap<String,String> tekstovi = (HashMap<String, String>) Kontroler.getInstanca().getTekstovi();
-		HashMap<String,String> upiti = (HashMap<String, String>) Kontroler.getInstanca().getUpiti();
+		if(nazivKontrolera.equals("Kontroler2")){
+			tekstovi = (HashMap<String, String>) Kontroler2.getInstanca().getTekstovi();
+			upiti = (HashMap<String, String>) Kontroler2.getInstanca().getUpiti();
+		}
 		
 
 		List<Slicnost> nizSlicnosti = new ArrayList<>();
@@ -366,9 +373,9 @@ public class tfPojasnjenje {
 //		
 //    }
 //    
-    public static void vratiSlicnosti(String nazivFajla){
+    public static void vratiSlicnosti(String nazivFajla,String nazivKontrolera){
     	
-    	List<Slicnost> lista = tfPojasnjenje.generisiSlicnosti();
+    	List<Slicnost> lista = tfPojasnjenje.generisiSlicnosti(nazivKontrolera);
     	PrintWriter writer1;
 		try {
 			writer1 = new PrintWriter(nazivFajla, "UTF-8");
@@ -427,8 +434,8 @@ public class tfPojasnjenje {
     	//izvrsiSve(query,dokumenti);
     	
     	//vratiSlicnosti("slicnostProba.json");
-    	vratiSlicnosti("slicnost.json");
-    	
+    	vratiSlicnosti("slicnost.json","Kontroler");
+    	vratiSlicnosti("slicnostProba.json","Kontroler2");
     	
     	
     	

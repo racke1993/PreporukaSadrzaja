@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logika.Metode;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -16,6 +19,7 @@ public class Program extends JFrame {
 	private JTextField textField;
 	private JButton btnPokreniUpit;
 	private JTextField textField_1;
+	private JLabel lblUpitiSeNalaze;
 
 	/**
 	 * Launch the application.
@@ -57,8 +61,15 @@ public class Program extends JFrame {
 		btnPokreniUpit = new JButton("Pokreni upit");
 		btnPokreniUpit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String rezultat = Algoritmi2.laksaMetoda(textField.getText().trim());
+				String unos = ("/probniUpiti/").concat(textField.getText().trim());
+				if(!Metode.postoji(unos)){
+					textField_1.setText("probajte opet sa postojecim fajlovima");
+				}
+				else
+				{
+				String rezultat = Algoritmi2.vratiMinHillClimbing("probniUpiti/"+textField.getText().trim());
 				textField_1.setText(rezultat);
+				}
 			}
 		});
 		btnPokreniUpit.setBounds(154, 144, 117, 29);
@@ -68,5 +79,9 @@ public class Program extends JFrame {
 		textField_1.setBounds(23, 216, 398, 28);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
+		
+		lblUpitiSeNalaze = new JLabel("Upiti se nalaze u folderu probniUpiti");
+		lblUpitiSeNalaze.setBounds(6, 6, 278, 16);
+		contentPane.add(lblUpitiSeNalaze);
 	}
 }

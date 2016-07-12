@@ -26,8 +26,8 @@ public class Kontroler2 {
 	
 	public Kontroler2(){
 		
-		files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/fajloviProba/").listFiles();
-		files2 = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/probniUpiti/").listFiles();
+		files = new File("fajloviProba/").listFiles();
+		files2 = new File("probniUpiti/").listFiles();
 		//files = new File("/Users/Radomir/Documents/workspace/SeleniumProjekat/konacniFajlovi/").listFiles();
 		tekstovi = Metode.vratiFajlove(files);
 		upiti = Metode.vratiFajlove(files2);

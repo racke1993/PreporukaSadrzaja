@@ -15,7 +15,7 @@ public class Algoritmi {
 	
 	public static String vratiMinHillClimbing(String putanjaUpita){
 		 
-		String upit = Metode.vratiStringFajla(putanjaUpita);
+		String upit = Metode.vratiStringFajlaRelative(putanjaUpita);
 		
 		upit = upit.toLowerCase().trim();
 		
@@ -42,7 +42,9 @@ public class Algoritmi {
 				new Slicnost(rand,putanjaUpita),"Slicnost.json");
 		
 		System.out.println("Poredjenje izmedju upita: "+upit+" i random texta "+randomText+" je: "+max);
-		String maxKey =rand; String maxValue = nazivISadrzaj.get(rand);
+		
+		String maxKey =new File("").getAbsolutePath().concat("/"+rand); //samo u prvoj iteraciji
+		String maxValue = nazivISadrzaj.get(rand);
 		System.out.println(maxKey+ " Max value je: "+maxValue);
 		int brojac = 0;//ne sme npr proci vise od 6 suseda(6 najslicnijih)
 		
@@ -174,16 +176,12 @@ public class Algoritmi {
 		return niz[new Random().nextInt(map.size())];
 	
 	}
-	public static String metoda(String param){
-		String zaUpit = "/Users/Radomir/Documents/workspace/SeleniumProjekat/upiti/";
 
-    	return vratiMinHillClimbing(zaUpit+param);
-	}
 	
 	public static void main(String[] args){
 		
 
-		metoda("treciUpit.txt");
+		vratiMinHillClimbing("upiti/treciUpit.txt");
 		
 		
 		

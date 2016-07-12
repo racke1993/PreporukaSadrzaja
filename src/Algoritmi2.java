@@ -16,7 +16,7 @@ public class Algoritmi2 {
 	
 	public static String vratiMinHillClimbing(String putanjaUpita){
 		
-		String upit = Metode.vratiStringFajla(putanjaUpita);
+		String upit = Metode.vratiStringFajlaRelative(putanjaUpita);
 		System.out.println("Vas upit je: "+upit);
 		
 		upit = upit.toLowerCase().trim();
@@ -25,7 +25,7 @@ public class Algoritmi2 {
 		
 			
 		String rand = vratiRandom((HashMap<String, String>)nazivISadrzaj);
-		System.out.println("izmedju");
+		
 		String randomText = Metode.vratiStringFajla(rand).trim();//od random teksta se krece
 		
 		System.out.println("RANDOM TEXT JE: "+rand);
@@ -44,10 +44,12 @@ public class Algoritmi2 {
 		double max = JSONPamcenje.vratiInstancuSlicnostiIzJSONa(
 				new Slicnost(rand,putanjaUpita),"slicnostProba.json");
 		
+		System.out.println("max je : new Slicnost("+rand+" ,"+putanjaUpita+" ), slicnostProba.json");
 		
 		System.out.println("Poredjenje izmedju upita: "+upit+" i random texta "+randomText+" je: "+max);
 		
-		String maxKey =rand; String maxValue = nazivISadrzaj.get(rand);
+		String maxKey =new File("").getAbsolutePath().concat("/"+rand); //samo u prvoj iteraciji
+		String maxValue = nazivISadrzaj.get(rand);
 		System.out.println(maxKey+ " Max value je: "+maxValue);
 		int brojac = 0;//ne sme npr proci vise od 6 suseda(6 najslicnijih)
 		
@@ -197,7 +199,7 @@ public class Algoritmi2 {
 		List<String> strings = new ArrayList<String>(Arrays.asList(reci));
 		for(String rec : strings){System.out.println(rec);}
 		*/
-		vratiMinHillClimbing("/Users/Radomir/Documents/workspace/SeleniumProjekat/probniUpiti/treciUpit.txt");
+		vratiMinHillClimbing("probniUpiti/treciUpit.txt");
 		
 		//vratiMinHillClimbing("leave me alone");
 		
