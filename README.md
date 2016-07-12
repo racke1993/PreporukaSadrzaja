@@ -10,7 +10,7 @@ U ovoj aplikaciji biće korišćeni tekstualni fajlovi preuzeti sa sajta [*The G
 
 ##Kako od stringa napraviti vektor brojeva?
 
-Na najjednostavnijem primeru dve rečenice koje glase :
+Na najjednostavnijem primeru dve rečenice koje glase:
 ```
 1) Julie loves me more than Linda loves me 
 2) Jane likes me more than Julie loves me
